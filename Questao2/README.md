@@ -46,4 +46,6 @@ Um método foi utilizado, composto por:
 
 - um loop while para adicionar caracteres à string s, até que fique idêntica à string t;
 
-- um teste if para avaliação do resultado.
+- dois testes if para avaliação do resultado.
+
+Mais detalhes estão presentes em comentário no código.
