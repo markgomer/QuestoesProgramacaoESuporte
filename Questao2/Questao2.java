@@ -4,23 +4,37 @@ public class Questao2 {
   public static Scanner scanner = new Scanner(System.in);
 
 
-  public static boolean ConcatERemove(String s, String t, int k) {
+  public static boolean ConcatERemove(final String s, final String t, final int k) {
     boolean resp = false; /* variable to be returned at the end of this method */
     int count = 0; /* counter to be added until it matches k */
+    String comparable = s; /* will be used to compare to t and don't change s */
 
-    // removing last char of s until t starts with s
-    while(!t.startsWith(s) && count < k) {  
+    // removing last char of comparable until t starts with comparable
+    while(!t.startsWith(comparable) && count < k) {  
       count++;
-      s = s.substring(0, s.length() - 1);
+      comparable = comparable.substring(0, comparable.length() - 1);
     }
 
-    // adding chars from t to s until they become equal
-    while(!s.equals(t) && count < k) {
+    // adding chars from t to comparable until they become equal
+    while(!comparable.equals(t) && count < k) {
       count++;
-      s += t.charAt(s.length());
+      comparable += t.charAt(comparable.length());
     }
     
-    if(s.equals(t)) {
+    /**
+     * if these conditions are met, the comparable string may be empty and it could
+     * have enough empty string removing operations to match k at the end.
+     */
+    if(s.charAt(0) != t.charAt(0) && k > s.length() + t.length()) {
+      resp = true;
+    }
+
+    /** 
+     * If the comparable equals t and there are no more movements, the conditions are met.
+     * If the counter is even, the last char can be added and removed until there are no 
+     *  movements left and the comparable will match t.
+     */
+    if((comparable.equals(t) && (count == k || count%2==0))) { 
       resp = true; /* updates the response to be returned */
     }
 
